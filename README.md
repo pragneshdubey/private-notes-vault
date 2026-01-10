@@ -20,21 +20,21 @@ To build a private notes application where:
 ## 🚀 Features
 
 ### 🔑 Authentication
-- Email & Password login
-- Google OAuth login
-- Supabase Authentication
+- Email & Password login  
+- Google OAuth login  
+- Supabase Authentication  
 - Protected routes (unauthenticated users cannot access notes)
 
 ### 📝 Notes
-- Create a new note
-- View all personal notes
-- Edit existing notes
-- Delete notes
+- Create a new note  
+- View all personal notes  
+- Edit existing notes  
+- Delete notes  
 
 Each note contains:
-- Title
-- Content
-- Created timestamp
+- Title  
+- Content  
+- Created timestamp  
 
 ---
 
@@ -47,26 +47,31 @@ This project uses **Supabase Row Level Security (RLS)** to ensure complete data 
 - No public notes
 - No sharing
 - No cross-user access
+
 ### 🔐 RLS Policy
-
-sql
+```sql
 auth.uid() = user_id
-🧠 Tech Stack
-Frontend
-React (Vite)
+```
 
-React Router
+This ensures database-level security even if API requests are manipulated.
 
-Tailwind CSS
+---
 
-Backend
-Supabase (PostgreSQL + Authentication)
+## 🧠 Tech Stack
 
-Supabase Row Level Security (RLS)
+### Frontend
+- React (Vite)
+- React Router
+- Tailwind CSS
 
-🗄 Database Schema
-sql
-Copy code
+### Backend
+- Supabase (PostgreSQL + Authentication)
+- Supabase Row Level Security (RLS)
+
+---
+
+## 🗄 Database Schema
+```sql
 create table notes (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references auth.users(id) on delete cascade,
@@ -74,47 +79,62 @@ create table notes (
   content text not null,
   created_at timestamptz default now()
 );
-🖥 UI Philosophy
+```
+
+---
+
+## 🖥 UI Philosophy
+
 The interface is intentionally:
 
-Minimal
+- Minimal
+- Private
+- Distraction-free
 
-Private
+Designed as a **personal scratchpad**, not a productivity or collaboration tool.
 
-Distraction-free
+---
 
-Designed as a personal scratchpad, not a productivity or collaboration tool.
+## ⚙️ Local Setup
 
-⚙️ Local Setup
-1️⃣ Clone the repository
-bash
-Copy code
+### 1️⃣ Clone the repository
+```bash
 git clone https://github.com/pragneshdubey/private-notes-vault.git
 cd private-notes-vault
-2️⃣ Install dependencies
-bash
-Copy code
-npm install
-3️⃣ Environment Variables
-Create a .env file in the root directory:
+```
 
-env
-Copy code
+### 2️⃣ Install dependencies
+```bash
+npm install
+```
+
+### 3️⃣ Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-⚠️ Do not commit .env files
-A .env.example file is recommended.
+```
 
-4️⃣ Start the development server
-bash
-Copy code
+⚠️ **Do not commit `.env` files**  
+A `.env.example` file is recommended.
+
+### 4️⃣ Start the development server
+```bash
 npm run dev
-🌍 Live Demo
+```
+
+---
+
+## 🌍 Live Demo
+
 🔗 https://fluffy-snickerdoodle-8b8a8b.netlify.app/
 
-📁 Project Structure
-text
-Copy code
+---
+
+## 📁 Project Structure
+```text
 src/
  ├── components/
  │   └── AuthGuard.jsx
@@ -129,31 +149,36 @@ src/
  ├── App.jsx
  ├── main.jsx
  └── index.css
-📌 Scope & Constraints
+```
+
+---
+
+## 📌 Scope & Constraints
+
 This project intentionally avoids:
 
-Public or shared notes
+- Public or shared notes
+- Tags or folders
+- Rich text editors
+- Advanced productivity features
 
-Tags or folders
+The focus is on **security, clarity, and correctness**.
 
-Rich text editors
+---
 
-Advanced productivity features
+## 🏁 Project Status
 
-The focus is on security, clarity, and correctness.
+- ✅ Authentication implemented
+- ✅ Notes CRUD completed
+- ✅ Row Level Security enforced
+- ✅ Production deployment completed
+- ✅ Meets full-stack internship assignment requirements
 
-🏁 Project Status
-✅ Authentication implemented
+---
 
-✅ Notes CRUD completed
+## 👨‍💻 Author
 
-✅ Row Level Security enforced
+**Pragnesh Dubey**  
+Full-Stack Internship Assignment  
 
-✅ Production deployment completed
-
-✅ Meets full-stack internship assignment requirements
-
-👨‍💻 Author
-Pragnesh Dubey
-Full-Stack Internship Assignment
 GitHub: https://github.com/pragneshdubey
