@@ -47,9 +47,9 @@ This project uses **Supabase Row Level Security (RLS)** to ensure complete data 
 - No public notes
 - No sharing
 - No cross-user access
+### 🔐 RLS Policy
 
-### RLS Policy
-```sql
+sql
 auth.uid() = user_id
 🧠 Tech Stack
 Frontend
@@ -113,7 +113,7 @@ npm run dev
 🔗 https://fluffy-snickerdoodle-8b8a8b.netlify.app/
 
 📁 Project Structure
-css
+text
 Copy code
 src/
  ├── components/
