@@ -1,34 +1,35 @@
 # 🔐 Private Notes Vault
 
-A secure, authenticated personal notes web application where each user can create, view, edit, and delete their own private notes.
+**Private Notes Vault** is a secure, authenticated personal notes web application where each user can create, view, edit, and delete their own private notes.
 
-This project focuses on authentication, data ownership, and a clean, distraction-free UI rather than advanced productivity features.
+The project emphasizes **authentication, data ownership, and security**, with a clean, distraction-free UI.
 
 ---
 
 ## 🎯 Objective
 
-Build a private notes application where:
+To build a private notes application where:
 
 - Notes are strictly tied to the authenticated user
 - Users can only access their own data
-- The UI feels simple, focused, and private
+- Security is enforced at the database level
+- The UI remains simple, private, and focused
 
 ---
 
 ## 🚀 Features
 
 ### 🔑 Authentication
-- Email & Password authentication
+- Email & Password login
 - Google OAuth login
-- Powered by Supabase Authentication
-- Unauthenticated users cannot access notes
+- Supabase Authentication
+- Protected routes (unauthenticated users cannot access notes)
 
 ### 📝 Notes
 - Create a new note
-- View a list of your notes
-- Edit an existing note
-- Delete a note
+- View all personal notes
+- Edit existing notes
+- Delete notes
 
 Each note contains:
 - Title
@@ -39,14 +40,120 @@ Each note contains:
 
 ## 🔒 Security & Data Ownership
 
-Security is enforced at the database level using **Supabase Row Level Security (RLS)**.
+This project uses **Supabase Row Level Security (RLS)** to ensure complete data isolation.
 
 - Every note is linked to the authenticated user's `user_id`
-- Users can only read, insert, update, and delete their own notes
+- Users can only read, insert, update, or delete their own notes
 - No public notes
 - No sharing
 - No cross-user access
 
-**RLS Condition**
+### RLS Policy
 ```sql
 auth.uid() = user_id
+🧠 Tech Stack
+Frontend
+React (Vite)
+
+React Router
+
+Tailwind CSS
+
+Backend
+Supabase (PostgreSQL + Authentication)
+
+Supabase Row Level Security (RLS)
+
+🗄 Database Schema
+sql
+Copy code
+create table notes (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade,
+  title text not null,
+  content text not null,
+  created_at timestamptz default now()
+);
+🖥 UI Philosophy
+The interface is intentionally:
+
+Minimal
+
+Private
+
+Distraction-free
+
+Designed as a personal scratchpad, not a productivity or collaboration tool.
+
+⚙️ Local Setup
+1️⃣ Clone the repository
+bash
+Copy code
+git clone https://github.com/pragneshdubey/private-notes-vault.git
+cd private-notes-vault
+2️⃣ Install dependencies
+bash
+Copy code
+npm install
+3️⃣ Environment Variables
+Create a .env file in the root directory:
+
+env
+Copy code
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+⚠️ Do not commit .env files
+A .env.example file is recommended.
+
+4️⃣ Start the development server
+bash
+Copy code
+npm run dev
+🌍 Live Demo
+🔗 https://fluffy-snickerdoodle-8b8a8b.netlify.app/
+
+📁 Project Structure
+css
+Copy code
+src/
+ ├── components/
+ │   └── AuthGuard.jsx
+ ├── lib/
+ │   └── supabase.js
+ ├── pages/
+ │   ├── Login.jsx
+ │   ├── Signup.jsx
+ │   ├── Dashboard.jsx
+ │   ├── NewNote.jsx
+ │   └── EditNote.jsx
+ ├── App.jsx
+ ├── main.jsx
+ └── index.css
+📌 Scope & Constraints
+This project intentionally avoids:
+
+Public or shared notes
+
+Tags or folders
+
+Rich text editors
+
+Advanced productivity features
+
+The focus is on security, clarity, and correctness.
+
+🏁 Project Status
+✅ Authentication implemented
+
+✅ Notes CRUD completed
+
+✅ Row Level Security enforced
+
+✅ Production deployment completed
+
+✅ Meets full-stack internship assignment requirements
+
+👨‍💻 Author
+Pragnesh Dubey
+Full-Stack Internship Assignment
+GitHub: https://github.com/pragneshdubey
