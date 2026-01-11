@@ -23,8 +23,9 @@ export default function AuthGuard({ children }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center text-white">
-        Loading...
+      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center gap-4 text-slate-300">
+        <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        <p className="text-sm tracking-wide">Securing your vault...</p>
       </div>
     );
   }
